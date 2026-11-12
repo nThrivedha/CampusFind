@@ -9,8 +9,9 @@ import shutil
 # Set test environment before importing app
 os.environ["CAMPUSFIND_SECRET_KEY"] = "test-secret-key-12345"
 
-from app import app, get_db
-import seed
+from campus_lost_found.app import app, get_db
+from campus_lost_found import app as app_module
+import campus_lost_found.seed as seed
 
 
 class CampusFindTestCase(unittest.TestCase):
@@ -27,7 +28,6 @@ class CampusFindTestCase(unittest.TestCase):
         seed.seed_database(db_path=self.db_path, schema_path=schema_path)
 
         # Patch app.py's DATABASE path for the test run
-        import app as app_module
         self.original_db = app_module.DATABASE
         app_module.DATABASE = self.db_path
 
@@ -35,7 +35,6 @@ class CampusFindTestCase(unittest.TestCase):
 
     def tearDown(self):
         """Clean up the temporary directory."""
-        import app as app_module
         app_module.DATABASE = self.original_db
         shutil.rmtree(self.temp_dir, ignore_errors=True)
 

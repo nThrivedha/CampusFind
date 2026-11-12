@@ -1,0 +1,1 @@
+"""CampusFind application package."""
