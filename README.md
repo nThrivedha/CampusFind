@@ -56,13 +56,17 @@ UniTrace/
 ├── render.yaml                 # Render Blueprint configuration
 ├── Dockerfile                  # Container definition
 ├── requirements.txt            # Root dependencies (Flask, Gunicorn, Waitress)
+├── database.sql                # Complete plain-text SQL dump viewable directly on GitHub
+├── database.sqlite             # SQLite database file (.sqlite format)
 ├── run.bat                     # Root Windows batch launcher
 ├── run.ps1                     # Root PowerShell launcher
 ├── README.md                   # Project overview & quickstart guide
 ├── .gitignore                  # Git ignore rules for root workspace
 └── campus_lost_found/          # Main application package
     ├── app.py                  # Flask routes, auth, session & error handling
-    ├── database.db             # Pre-populated SQLite database
+    ├── database.db             # Pre-populated SQLite database (.db format)
+    ├── database.sqlite         # SQLite database file (.sqlite format)
+    ├── database.sql            # Plain-text SQL dump (readable in Git)
     ├── schema.sql              # Standalone SQL schema DDL with indexes
     ├── seed.py                 # Database reset & demo seeder script
     ├── init_db.py              # Database schema initialization script

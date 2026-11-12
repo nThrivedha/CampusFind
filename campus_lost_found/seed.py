@@ -87,6 +87,10 @@ def seed_database(db_path=DATABASE_PATH, schema_path=SCHEMA_PATH):
     # 2. Clear old data if reseeding
     cursor.execute("DELETE FROM items;")
     cursor.execute("DELETE FROM users;")
+    try:
+        cursor.execute("DELETE FROM sqlite_sequence;")
+    except sqlite3.OperationalError:
+        pass
 
     # 3. Insert demo users
     hashed_password = generate_password_hash("password123")
@@ -258,10 +262,44 @@ def seed_database(db_path=DATABASE_PATH, schema_path=SCHEMA_PATH):
     """, items_data)
 
     connection.commit()
+
+    # Generate complete SQL text dump viewable in Git / GitHub
+    sql_dump = (
+        "-- UniTrace SQLite Database Dump\n"
+        "-- Compatible with SQLite3, DB Browser for SQLite, and GitHub web viewer.\n"
+        "-- This file allows viewing the full database structure and sample data directly as text in Git.\n"
+        "-- To import into SQLite: sqlite3 database.db < database.sql\n\n"
+        + "\n".join(connection.iterdump())
+        + "\n"
+    )
+
+    sql_file = os.path.splitext(db_path)[0] + ".sql"
+    with open(sql_file, "w", encoding="utf-8") as f:
+        f.write(sql_dump)
+
     connection.close()
 
+    # Create copy with .sqlite extension
+    sqlite_file = os.path.splitext(db_path)[0] + ".sqlite"
+    import shutil
+    shutil.copyfile(db_path, sqlite_file)
+
+    # Mirror to workspace root if running within campus_lost_found/
+    parent_dir = os.path.dirname(BASE_DIR)
+    if os.path.exists(os.path.join(parent_dir, "campus_lost_found")):
+        root_sql = os.path.join(parent_dir, "database.sql")
+        root_sqlite = os.path.join(parent_dir, "database.sqlite")
+        try:
+            with open(root_sql, "w", encoding="utf-8") as f:
+                f.write(sql_dump)
+            shutil.copyfile(db_path, root_sqlite)
+        except Exception:
+            pass
+
     print("\n[SUCCESS] Database seeded successfully!")
-    print(f"Database location: {db_path}")
+    print(f"Database file: {db_path}")
+    print(f"Readable SQL dump: {sql_file}")
+    print(f"SQLite extension: {sqlite_file}")
     print("\nDemo Accounts (password for all is 'password123'):")
     print("  - alice@campus.edu")
     print("  - bob@campus.edu")

@@ -50,9 +50,10 @@ You can log in immediately using any of these test accounts (password for all is
 Or create a new account via the **Register** page.
 
 ## Database & Utilities
-- `database.db`: SQLite database file with tables (`users`, `items`) and seeded listings.
+- `database.sql`: Plain-text SQLite SQL dump readable directly on GitHub with all tables and rows.
+- `database.sqlite` & `database.db`: SQLite database files for SQLite CLI, DB Browser, and Flask.
 - `schema.sql`: Clean SQL DDL schema definitions, foreign key constraints, and performance indexes.
-- `seed.py`: Seeder script that resets and populates the database with realistic demo accounts and sample reports.
+- `seed.py`: Seeder script that resets and populates the database and automatically updates `database.sql`.
 - `init_db.py`: Initializes the database tables directly from `schema.sql`.
 - `test_app.py`: Automated test suite covering auth, reporting, search/filtering, and permissions. Run via:
   ```powershell
