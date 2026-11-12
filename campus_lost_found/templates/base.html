@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CampusFind helps students report and find lost belongings around campus.">
-    <title>{% block title %}CampusFind — Campus Lost & Found{% endblock %}</title>
+    <meta name="description" content="UniTrace helps students report and find lost belongings around campus.">
+    <title>{% block title %}UniTrace — Campus Lost & Found{% endblock %}</title>
     <link rel="icon" type="image/svg+xml" href="{{ url_for('static', filename='favicon.svg') }}">
     <link rel="alternate icon" href="{{ url_for('static', filename='favicon.ico') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
@@ -14,8 +14,8 @@
     <header class="site-header">
         <nav class="navbar container" aria-label="Main navigation">
             <a class="brand" href="{{ url_for('home') }}">
-                <span class="brand-mark">C</span>
-                <span>Campus<span class="brand-accent">Find</span></span>
+                <span class="brand-mark">U</span>
+                <span>Uni<span class="brand-accent">Trace</span></span>
             </a>
             <button class="menu-toggle" type="button" aria-label="Toggle navigation" aria-expanded="false">☰</button>
             <div class="nav-links">
@@ -48,10 +48,10 @@
     <footer class="site-footer">
         <div class="container footer-inner">
             <a class="brand footer-brand" href="{{ url_for('home') }}">
-                <span class="brand-mark">C</span><span>Campus<span class="brand-accent">Find</span></span>
+                <span class="brand-mark">U</span><span>Uni<span class="brand-accent">Trace</span></span>
             </a>
             <p>Helping campus belongings find their way home.</p>
-            <span>© {{ current_year }} CampusFind · Student project</span>
+            <span>© {{ current_year }} UniTrace · Student project</span>
         </div>
     </footer>
 </body>

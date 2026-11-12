@@ -1,4 +1,4 @@
-"""Unit and integration test suite for CampusFind Flask application.
+"""Unit and integration test suite for UniTrace Flask application.
 Tests authentication, reporting, search/filtering, item management, and access control.
 """
 import os
@@ -7,14 +7,14 @@ import tempfile
 import shutil
 
 # Set test environment before importing app
-os.environ["CAMPUSFIND_SECRET_KEY"] = "test-secret-key-12345"
+os.environ["UNITRACE_SECRET_KEY"] = "test-secret-key-12345"
 
 from campus_lost_found.app import app, get_db
 from campus_lost_found import app as app_module
 import campus_lost_found.seed as seed
 
 
-class CampusFindTestCase(unittest.TestCase):
+class UniTraceTestCase(unittest.TestCase):
     def setUp(self):
         """Set up a clean temporary database and test client for each test."""
         self.temp_dir = tempfile.mkdtemp()
@@ -55,8 +55,8 @@ class CampusFindTestCase(unittest.TestCase):
         """Verify homepage renders successfully with seeded statistics and items."""
         response = self.client.get("/")
         self.assertEqual(response.status_code, 200)
-        self.assertIn(b"Campus", response.data)
-        self.assertIn(b"Find", response.data)
+        self.assertIn(b"Uni", response.data)
+        self.assertIn(b"Trace", response.data)
         self.assertIn(b"Casio FX-991EX Scientific Calculator", response.data)
 
     def test_search_and_filter(self):

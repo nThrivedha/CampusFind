@@ -1,4 +1,4 @@
--- CampusFind SQLite Database Schema
+-- UniTrace SQLite Database Schema
 -- Provides schema definitions for users, items, foreign keys, and indexes.
 
 PRAGMA foreign_keys = ON;

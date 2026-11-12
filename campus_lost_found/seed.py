@@ -1,4 +1,4 @@
-"""Database seeder for CampusFind.
+"""Database seeder for UniTrace.
 Populates the database with demo users and realistic campus lost & found reports.
 Also ensures sample upload images exist in static/uploads/.
 """
@@ -32,7 +32,7 @@ def create_sample_image(filename, title, category, color_bgr):
         cv2.rectangle(img, (0, height - 12), (width, height), (57, 120, 198), -1)
 
         # Header text
-        cv2.putText(img, "CampusFind Item Preview", (24, 48),
+        cv2.putText(img, "UniTrace Item Preview", (24, 48),
                     cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255, 255, 255), 2, cv2.LINE_AA)
 
         # Center card

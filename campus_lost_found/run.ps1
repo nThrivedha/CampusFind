@@ -1,9 +1,9 @@
-# CampusFind — PowerShell Launcher Script
+# UniTrace — PowerShell Launcher Script
 $ErrorActionPreference = "Stop"
 Set-Location -Path $PSScriptRoot
 
 Write-Host "============================================================" -ForegroundColor Cyan
-Write-Host "  CampusFind — Campus Lost & Found Management System" -ForegroundColor White
+Write-Host "  UniTrace — Campus Lost & Found Management System" -ForegroundColor White
 Write-Host "============================================================" -ForegroundColor Cyan
 Write-Host ""
 
@@ -40,7 +40,7 @@ if (-not (Test-Path "database.db")) {
 
 Write-Host ""
 Write-Host "============================================================" -ForegroundColor Green
-Write-Host "  CampusFind server starting at http://127.0.0.1:5000" -ForegroundColor White
+Write-Host "  UniTrace server starting at http://127.0.0.1:5000" -ForegroundColor White
 Write-Host "  Press Ctrl+C in this terminal to stop the server." -ForegroundColor Yellow
 Write-Host "============================================================" -ForegroundColor Green
 Write-Host ""

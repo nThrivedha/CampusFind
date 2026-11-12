@@ -1,4 +1,4 @@
-"""CampusFind — Root Workspace & Production WSGI Entrypoint
+"""UniTrace — Root Workspace & Production WSGI Entrypoint
 Imports the Flask application from campus_lost_found and initializes database if needed.
 """
 import os
@@ -25,5 +25,5 @@ else:
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 5000))
     host = os.environ.get("HOST", "0.0.0.0")
-    print(f"Starting CampusFind server on http://{host}:{port}...")
+    print(f"Starting UniTrace server on http://{host}:{port}...")
     app.run(host=host, port=port, debug=False)

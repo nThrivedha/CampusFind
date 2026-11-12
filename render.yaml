@@ -1,9 +1,9 @@
 services:
   - type: web
-    name: campusfind
+    name: unitrace
     runtime: python
     buildCommand: pip install -r requirements.txt
     startCommand: gunicorn --bind 0.0.0.0:$PORT wsgi:app
     envVars:
-      - key: CAMPUSFIND_SECRET_KEY
+      - key: UNITRACE_SECRET_KEY
         generateValue: true

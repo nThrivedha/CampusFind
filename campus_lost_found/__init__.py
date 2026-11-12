@@ -1,1 +1,1 @@
-"""CampusFind application package."""
+"""UniTrace application package."""

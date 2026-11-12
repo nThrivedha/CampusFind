@@ -16,7 +16,7 @@ UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
 ALLOWED_EXTENSIONS = {"png", "jpg", "jpeg", "gif", "webp"}
 
 app = Flask(__name__)
-app.config["SECRET_KEY"] = os.environ.get("CAMPUSFIND_SECRET_KEY", "change-this-development-key")
+app.config["SECRET_KEY"] = os.environ.get("UNITRACE_SECRET_KEY", "change-this-development-key")
 app.config["UPLOAD_FOLDER"] = UPLOAD_FOLDER
 app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024  # 5 MB maximum upload
 

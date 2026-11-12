@@ -1,6 +1,6 @@
-# CampusFind — Campus Lost & Found Management System
+# UniTrace — Campus Lost & Found Management System
 
-CampusFind is a complete full-stack web application designed for university campuses. It allows students and campus staff to report lost and found belongings, browse and search community listings, filter by categories and report types, and manage their own reports.
+UniTrace is a complete full-stack web application designed for university campuses. It allows students and campus staff to report lost and found belongings, browse and search community listings, filter by categories and report types, and manage their own reports.
 
 ---
 
@@ -48,8 +48,14 @@ The database comes pre-seeded with sample users and realistic campus listings:
 ## Project Structure
 
 ```
-CampusFind_Complete_Project/
+UniTrace/
 ├── app.py                      # Root launcher proxy (run: python app.py)
+├── wsgi.py                     # Production WSGI entrypoint
+├── gunicorn.conf.py            # Gunicorn configuration (0.0.0.0:$PORT)
+├── Procfile                    # Web service process declaration
+├── render.yaml                 # Render Blueprint configuration
+├── Dockerfile                  # Container definition
+├── requirements.txt            # Root dependencies (Flask, Gunicorn, Waitress)
 ├── run.bat                     # Root Windows batch launcher
 ├── run.ps1                     # Root PowerShell launcher
 ├── README.md                   # Project overview & quickstart guide
@@ -110,6 +116,5 @@ CampusFind_Complete_Project/
 A comprehensive automated test suite covers homepage statistics, search/filtering, registration, login/logout, report publishing, ownership permissions, and status transitions:
 
 ```powershell
-cd campus_lost_found
-python -m unittest test_app.py -v
+python -m unittest campus_lost_found/test_app.py -v
 ```

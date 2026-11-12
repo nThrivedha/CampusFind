@@ -1,6 +1,6 @@
-# CampusFind — Campus Lost & Found Management System
+# UniTrace — Campus Lost & Found Management System
 
-CampusFind is a student full-stack web project that lets campus users create accounts, report lost or found belongings, browse and search reports, and manage their own listings.
+UniTrace is a student full-stack web project that lets campus users create accounts, report lost or found belongings, browse and search reports, and manage their own listings.
 
 ## Technology
 - HTML5 and CSS3

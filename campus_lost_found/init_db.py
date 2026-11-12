@@ -1,4 +1,4 @@
-"""Database initialization script for CampusFind.
+"""Database initialization script for UniTrace.
 Executes schema.sql to set up database tables and indexes.
 """
 import os

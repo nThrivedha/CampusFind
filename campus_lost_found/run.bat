@@ -1,10 +1,10 @@
 @echo off
 setlocal
 cd /d "%~dp0"
-title CampusFind — Lost & Found System
+title UniTrace — Lost & Found System
 
 echo ============================================================
-echo   CampusFind — Campus Lost & Found Management System
+echo   UniTrace — Campus Lost & Found Management System
 echo ============================================================
 echo.
 
@@ -43,7 +43,7 @@ if not exist "database.db" (
 :: Launch web application
 echo.
 echo ============================================================
-echo   CampusFind server starting at http://127.0.0.1:5000
+echo   UniTrace server starting at http://127.0.0.1:5000
 echo   Press Ctrl+C in this terminal to stop the server.
 echo ============================================================
 echo.
