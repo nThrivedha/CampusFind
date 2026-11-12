@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Report an item — CampusFind{% endblock %}
+{% block content %}
+<section class="form-page container">
+    <div class="form-intro"><span class="eyebrow">HELP THE COMMUNITY</span><h1>Let's get this item home.</h1><p>Share a few details so the right person can recognise it.</p></div>
+    <form class="report-form" method="post" enctype="multipart/form-data">
+        <div class="form-row">
+            <label>I'm reporting a <select name="item_type" required><option value="Lost">Lost item</option><option value="Found">Found item</option></select></label>
+            <label>Category<select name="category" required><option value="">Choose a category</option><option>Electronics</option><option>ID / Cards</option><option>Books & Notes</option><option>Bags</option><option>Clothing</option><option>Keys</option><option>Accessories</option><option>Other</option></select></label>
+        </div>
+        <label>Item name<input name="title" required maxlength="100" placeholder="e.g. Blue water bottle"></label>
+        <label>Description<textarea name="description" required maxlength="1200" rows="4" placeholder="Describe its colour, brand, or other identifying details. Avoid sharing private information."></textarea></label>
+        <div class="form-row">
+            <label>Location on campus<input name="location" required maxlength="120" placeholder="e.g. Library, second floor"></label>
+            <label>Date lost / found<input type="date" name="item_date" required max="{{ current_year }}-12-31"></label>
+        </div>
+        <label>Item photo <span class="optional">(optional, max 5 MB)</span><input type="file" name="image" accept=".png,.jpg,.jpeg,.gif,.webp,image/png,image/jpeg,image/gif,image/webp"></label>
+        <div class="form-actions"><a class="button button-secondary" href="{{ url_for('home') }}">Cancel</a><button class="button button-primary" type="submit">Publish report →</button></div>
+    </form>
+</section>
+{% endblock %}

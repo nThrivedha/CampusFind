@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Create an account — CampusFind{% endblock %}
+{% block content %}
+<section class="auth-section">
+    <div class="auth-card">
+        <a class="auth-mark" href="{{ url_for('home') }}">C</a>
+        <span class="eyebrow">JOIN THE COMMUNITY</span>
+        <h1>Create your account</h1>
+        <p class="auth-subtitle">A campus where we look out for each other.</p>
+        <form method="post" class="form-stack">
+            <label>Full name<input type="text" name="name" required maxlength="80" autocomplete="name" placeholder="Your name"></label>
+            <label>College email<input type="email" name="email" required maxlength="254" autocomplete="email" placeholder="you@example.com"></label>
+            <label>Password<input type="password" name="password" required minlength="8" autocomplete="new-password" placeholder="At least 8 characters"><small>Use at least 8 characters.</small></label>
+            <button class="button button-primary button-full" type="submit">Create account</button>
+        </form>
+        <p class="auth-switch">Already have an account? <a href="{{ url_for('login') }}">Log in</a></p>
+    </div>
+</section>
+{% endblock %}

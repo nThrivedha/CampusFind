@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}{{ item.title }} — CampusFind{% endblock %}
+{% block content %}
+<section class="details-page container">
+    <a class="back-link" href="{{ url_for('home') }}">← Back to listings</a>
+    <article class="details-card">
+        <div class="details-visual">
+            {% if item.image_filename %}
+                <img src="{{ url_for('static', filename='uploads/' ~ item.image_filename) }}" alt="{{ item.title }}">
+            {% else %}
+                <div class="item-placeholder details-placeholder"><span>{{ '⌕' if item.item_type == 'Lost' else '✓' }}</span><small>{{ item.category }}</small></div>
+            {% endif %}
+        </div>
+        <div class="details-content">
+            <span class="type-badge {{ 'badge-lost' if item.item_type == 'Lost' else 'badge-found' }}">{{ item.item_type }}</span>
+            <p class="item-meta">{{ item.category }} · {{ item.item_date }}</p>
+            <h1>{{ item.title }}</h1>
+            <p class="details-description">{{ item.description }}</p>
+            <div class="detail-line"><span>⌖</span><div><small>Location</small><strong>{{ item.location }}</strong></div></div>
+            <div class="detail-line"><span>♙</span><div><small>Reported by</small><strong>{{ item.reporter_name }}</strong></div></div>
+            <div class="detail-line"><span>◷</span><div><small>Status</small><strong>{{ item.status }}</strong></div></div>
+            {% if session.get('user_id') == item.user_id %}
+                <a class="button button-primary button-full details-owner-button" href="{{ url_for('dashboard') }}">Manage your report</a>
+            {% elif session.get('user_id') %}
+                <div class="detail-line"><span>✉</span><div><small>Contact Email</small><strong><a href="mailto:{{ item.reporter_email }}" style="color: var(--blue);">{{ item.reporter_email }}</a></strong></div></div>
+                <div class="notice-box">If you think this item belongs to you, contact the reporter above or campus security with proof of ownership.</div>
+            {% else %}
+                <a class="button button-primary button-full details-owner-button" href="{{ url_for('login', next=request.path) }}">Log in to contact reporter</a>
+            {% endif %}
+        </div>
+    </article>
+</section>
+{% endblock %}

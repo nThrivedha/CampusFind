@@ -1,0 +1,96 @@
+{% extends "base.html" %}
+{% block title %}CampusFind — Find what matters{% endblock %}
+{% block content %}
+<section class="hero-section">
+    <div class="container hero-grid">
+        <div class="hero-copy">
+            <span class="eyebrow"><span class="eyebrow-dot"></span> Your campus, connected</span>
+            <h1>Lost something?<br><span>Let's bring it home.</span></h1>
+            <p class="hero-description">A little help from your campus community can make a big difference. Find a missing item or help someone reunite with theirs.</p>
+            <div class="hero-actions">
+                <a class="button button-primary" href="{{ url_for('report_item') }}">＋ Report an item</a>
+                <a class="button button-secondary" href="#browse">Browse listings <span aria-hidden="true">→</span></a>
+            </div>
+            <div class="hero-note"><span class="note-check">✓</span> Made for our campus community</div>
+        </div>
+        <div class="hero-art" aria-label="Illustration of a lost-and-found box" role="img">
+            <div class="art-orbit orbit-one"></div><div class="art-orbit orbit-two"></div>
+            <div class="art-spark spark-one">✦</div><div class="art-spark spark-two">✦</div>
+            <div class="art-card card-back"><span class="mini-icon">⌕</span><span>Searching...</span></div>
+            <div class="art-box">
+                <div class="box-handle"></div>
+                <div class="box-label"><span class="box-logo">C</span><strong>LOST<br>& FOUND</strong></div>
+                <div class="box-heart">♡</div>
+            </div>
+            <div class="art-card card-front"><span class="found-check">✓</span><span><strong>Found it!</strong><small>One less thing to worry about</small></span></div>
+        </div>
+    </div>
+</section>
+
+<section class="stats-section">
+    <div class="container stats-grid">
+        <div class="stat"><span class="stat-icon">⌕</span><div><strong>{{ counts.lost }}</strong><span>Lost items</span></div></div>
+        <div class="stat"><span class="stat-icon stat-icon-green">✓</span><div><strong>{{ counts.found }}</strong><span>Found items</span></div></div>
+        <div class="stat"><span class="stat-icon stat-icon-purple">♡</span><div><strong>{{ counts.returned }}</strong><span>Items returned</span></div></div>
+        <div class="stat stat-message"><strong>Every item has a story.</strong><span>Let's help it find its way back.</span></div>
+    </div>
+</section>
+
+<section class="browse-section section-padding" id="browse">
+    <div class="container">
+        <div class="section-heading">
+            <div><span class="eyebrow">THE COMMUNITY BOARD</span><h2>Lost & found listings</h2><p>Look through recent reports from your campus.</p></div>
+            <a class="text-link" href="{{ url_for('report_item') }}">Post a report <span>→</span></a>
+        </div>
+        <form class="filter-bar" method="get" action="{{ url_for('home') }}">
+            <label class="search-field"><span aria-hidden="true">⌕</span><input type="search" name="q" placeholder="Search items, descriptions or locations..." value="{{ search }}"></label>
+            <select name="type" aria-label="Filter by item type">
+                <option value="">All reports</option>
+                <option value="Lost" {% if selected_type == 'Lost' %}selected{% endif %}>Lost items</option>
+                <option value="Found" {% if selected_type == 'Found' %}selected{% endif %}>Found items</option>
+            </select>
+            <select name="category" aria-label="Filter by category">
+                <option value="">All categories</option>
+                {% for category in categories %}
+                    <option value="{{ category }}" {% if selected_category == category %}selected{% endif %}>{{ category }}</option>
+                {% endfor %}
+            </select>
+            <button class="button button-primary filter-button" type="submit">Search</button>
+        </form>
+
+        {% if items %}
+        <div class="item-grid">
+            {% for item in items %}
+            <article class="item-card">
+                <a class="item-image-link" href="{{ url_for('item_details', item_id=item.id) }}">
+                    {% if item.image_filename %}
+                        <img class="item-image" src="{{ url_for('static', filename='uploads/' ~ item.image_filename) }}" alt="{{ item.title }}">
+                    {% else %}
+                        <div class="item-placeholder"><span>{{ '⌕' if item.item_type == 'Lost' else '✓' }}</span><small>{{ item.category }}</small></div>
+                    {% endif %}
+                    <span class="type-badge {{ 'badge-lost' if item.item_type == 'Lost' else 'badge-found' }}">{{ item.item_type }}</span>
+                </a>
+                <div class="item-card-body">
+                    <div class="item-meta"><span>{{ item.category }}</span><span>·</span><span>{{ item.item_date }}</span></div>
+                    <h3><a href="{{ url_for('item_details', item_id=item.id) }}">{{ item.title }}</a></h3>
+                    <p>{{ item.description | truncate(105) }}</p>
+                    <div class="item-location"><span>⌖</span>{{ item.location }}</div>
+                    <a class="card-link" href="{{ url_for('item_details', item_id=item.id) }}">View details <span>→</span></a>
+                </div>
+            </article>
+            {% endfor %}
+        </div>
+        {% else %}
+        <div class="empty-state">
+            <div class="empty-icon">⌕</div><h3>No reports found just yet</h3>
+            <p>{% if search or selected_type or selected_category %}Try changing your search or filters.{% else %}Be the first to post a lost or found item and help the community.{% endif %}</p>
+            <a class="button button-primary" href="{{ url_for('report_item') }}">Report an item</a>
+        </div>
+        {% endif %}
+    </div>
+</section>
+
+<section class="bottom-cta">
+    <div class="container bottom-cta-inner"><div><span class="eyebrow">SMALL ACTS, BIG DIFFERENCE</span><h2>Found something that isn't yours?</h2><p>Someone on campus might be looking for it right now.</p></div><a class="button button-light" href="{{ url_for('report_item') }}">Help return it <span>→</span></a></div>
+</section>
+{% endblock %}
